@@ -6,33 +6,76 @@
   <title>二维码添加账户</title>
   <style>
     body {
-      font-family: sans-serif;
-      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      margin-top: 60px;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
       text-align: center;
     }
+
     h1 {
-      font-size: 20px;
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 10px;
     }
+
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
     #result {
-      margin-top: 20px;
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: bold;
       color: green;
     }
+
     button {
-      padding: 6px 10px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
       font-size: 14px;
-      margin-top: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
-    #qrFileInput {
-      margin-top: 15px;
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>二维码添加账户</h1>
-  <p>请选择包含 otpauth:// 信息的二维码图片</p>
-  <input type="file" id="qrFileInput" accept="image/*" />
-  <div id="result"></div>
-  <button id="backBtn">返回</button>
+  <div class="container">
+    <h1>二维码添加账户</h1>
+    <p>请选择包含 <code>otpauth://</code> 信息的二维码图片</p>
+    <input type="file" id="qrFileInput" accept="image/*" />
+    <div id="result"></div>
+    <button id="backBtn">返回</button>
+  </div>
 
   <!-- 引入 jsQR 库（使用 CDN） -->
   <script src="jsQR.js"></script>

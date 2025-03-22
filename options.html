@@ -3,20 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>验证码生成器 导入/导出 TOTP 数据</title>
+  <title>验证码生成器 - 导入/导出</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    h1 { font-size: 20px; }
-    button { padding: 6px 10px; font-size: 14px; margin-right: 10px; }
+    :root {
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --text-main: #111827;
+      --text-sub: #6b7280;
+      --border: #e5e7eb;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --warn-bg: #fef3c7;
+      --warn-text: #92400e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .card {
+      margin-top: 80px;
+      padding: 32px 40px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 20px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--text-sub);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .warning {
+      background-color: var(--warn-bg);
+      color: var(--warn-text);
+      font-size: 13px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    @media (max-width: 520px) {
+      .card {
+        margin-top: 40px;
+        padding: 24px;
+      }
+      .button-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>验证码生成器 导入/导出 TOTP 数据</h1>
-   <h2>导出数据可使用加密，（留空则不加密）</h2>
-      <h2>注意：加密密码一旦丢失将再也无法导入！！！</h2>
-  <button id="exportData">导出数据</button>
-  <button id="importData">导入数据</button>
-  <input type="file" id="importFileInput" accept=".json" style="display:none" />
+  <div class="card">
+    <h1>导入 / 导出账户数据</h1>
+    <p>将你的 《验证码生成器》 账户安全地备份或恢复。</p>
+
+    <div class="warning">
+      ⚠️ 可选择为导出文件设置加密密码（留空则不加密）。<br/>
+      一旦遗忘密码将无法恢复数据，请务必妥善保存。
+    </div>
+
+    <div class="button-group">
+      <button id="exportData">📤 导出数据</button>
+      <button id="importData">📥 导入数据</button>
+      <input type="file" id="importFileInput" accept=".json" />
+    </div>
+  </div>
 
   <script src="options.js"></script>
 </body>

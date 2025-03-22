@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>验证码生成器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>验证码生成器</h1>
+    <button id="importExport" class="import-export-button">导入导出</button>
+  </header>
+
+  <!-- 添加账号区域（手动添加和二维码添加） -->
+  <div id="add-section">
+    <input type="text" id="accountName" placeholder="账号名称" />
+    <input type="text" id="accountSecret" placeholder="密钥（Base32）" />
+    <button id="confirmAddAccount">添加账号</button>
+    <!-- 新增：二维码添加按钮 -->
+<button id="qrPageButton" class="scan-qr-button">二维码添加</button>
+
+    <!-- 隐藏的文件输入用于选择二维码图片 -->
+    <input type="file" id="qrFileInput" accept="image/*" style="display:none" />
+  </div>
+
+  <input type="text" id="search" placeholder="搜索账号..." />
+  <div id="accounts" class="sortable-list"></div>
+
+  <!-- 引入 jsQR 库（可使用 CDN） -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script src="popup.js"></script>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="editModal">
+      <h3>编辑账号</h3>
+      <input type="text" id="editName" placeholder="账号名称" />
+      <input type="text" id="editSecret" placeholder="密钥" />
+      <div class="actions">
+        <button id="cancelEdit">取消</button>
+        <button id="saveEdit">保存</button>
+      </div>
+    </div>
+    <div class="modal" id="confirmModal" style="display:none">
+      <h3 id="confirmText">确认删除？</h3>
+      <div class="actions">
+        <button id="cancelDelete">取消</button>
+        <button id="confirmDelete">确认</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

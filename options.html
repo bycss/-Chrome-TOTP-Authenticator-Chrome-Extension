@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>验证码生成器 导入/导出 TOTP 数据</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    h1 { font-size: 20px; }
+    button { padding: 6px 10px; font-size: 14px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>验证码生成器 导入/导出 TOTP 数据</h1>
+   <h2>导出数据可使用加密，（留空则不加密）</h2>
+      <h2>注意：加密密码一旦丢失将再也无法导入！！！</h2>
+  <button id="exportData">导出数据</button>
+  <button id="importData">导入数据</button>
+  <input type="file" id="importFileInput" accept=".json" style="display:none" />
+
+  <script src="options.js"></script>
+</body>
+</html>

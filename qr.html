@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>二维码添加账户</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 20px;
+    }
+    #result {
+      margin-top: 20px;
+      color: green;
+    }
+    button {
+      padding: 6px 10px;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+    #qrFileInput {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>二维码添加账户</h1>
+  <p>请选择包含 otpauth:// 信息的二维码图片</p>
+  <input type="file" id="qrFileInput" accept="image/*" />
+  <div id="result"></div>
+  <button id="backBtn">返回</button>
+
+  <!-- 引入 jsQR 库（使用 CDN） -->
+  <script src="jsQR.js"></script>
+  <script src="qr.js"></script>
+</body>
+</html>

@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function base32ToHex(base32) {
     const base32chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
     let bits = "", hex = "";
-    base32 = base32.toUpperCase().replace(/=+$/, "");
+    // 移除所有空格和非Base32字符，转换为大写，移除填充字符
+    base32 = base32.toUpperCase().replace(/[^A-Z2-7]/g, "").replace(/=+$/, "");
     for (let i = 0; i < base32.length; i++) {
       const val = base32chars.indexOf(base32.charAt(i));
       bits += val.toString(2).padStart(5, '0');
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const codeSpan = document.createElement("span");
     codeSpan.className = "account-code";
-    codeSpan.dataset.secret = acc.secret;
+    codeSpan.dataset.index = idx;
 
     const circle = document.createElement("div");
     circle.className = "circle";
@@ -152,11 +153,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const remaining = getSecondsRemaining();
     const percent = ((30 - remaining) / 30) * 360;
     document.querySelectorAll(".account-code").forEach(el => {
-      const secret = el.dataset.secret;
-      generateTOTP(secret).then(code => {
-        el.textContent = code;
-        el.classList.toggle("expiring", remaining <= 5);
-      });
+      const index = parseInt(el.dataset.index);
+      if (accounts[index]) {
+        const secret = accounts[index].secret;
+        generateTOTP(secret).then(code => {
+          el.textContent = code;
+          el.classList.toggle("expiring", remaining <= 5);
+        });
+      }
     });
     document.querySelectorAll(".circle").forEach(el => {
       el.style.background = `conic-gradient(#007bff ${percent}deg, #e0e0e0 0deg)`;
@@ -184,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = nameInput.value.trim();
     const secret = secretInput.value.trim();
     if (name && secret) {
-      accounts.push({ name, secret });
+      accounts.unshift({ name, secret });
       saveAccounts();
       renderAccounts();
       updateTOTPDisplay();
